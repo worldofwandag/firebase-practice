@@ -1,0 +1,30 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* .user__buttons {
+    display: flex;
+    padding: 10px;
+} */
+
+.btn__register {
+    background-color: purple;
+    color: white;
+    margin-left: 10px;
+}
+
+.user__initial {
+    border-radius: 1000px;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+}
+
+.btn__logout--icon {
+    border-radius: 1000px;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+}
