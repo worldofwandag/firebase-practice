@@ -15,10 +15,28 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    const userCurrentState = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        setIsLoggedIn(true);
+      } else {
+        setUser({});
+        setIsLoggedIn(false);
+      }
+      setLoading(false);
+    });
+
+    return () => userCurrentState();
+  }, []);
+  // code above let's the user stay logged in or out after refresh, so doesn't change the state
+
+  useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 2000);
   }, []);
+  // skeleton loading state code. this used tow ork until I implemented the useCurrentState above it.
+
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, (user) => {
