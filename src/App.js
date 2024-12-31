@@ -16,6 +16,11 @@ function App() {
 
   useEffect(() => {
     const userCurrentState = onAuthStateChanged(auth, (user) => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+      // put this code above first to manually set a time out to show the skeleton loading state.  However, in bigger apps, with your return below, it will automatically show a loading state because you set it to show a skeleton loading state while it's loading all the info on bigger apps
+
       if (user) {
         setUser(user);
         setIsLoggedIn(true);
@@ -23,30 +28,25 @@ function App() {
         setUser({});
         setIsLoggedIn(false);
       }
-      setLoading(false);
+      setLoading(true);
     });
 
     return () => userCurrentState();
   }, []);
   // code above let's the user stay logged in or out after refresh, so doesn't change the state
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-  // skeleton loading state code. this used tow ork until I implemented the useCurrentState above it.
+  // skeleton loading state code included above the if else so it runs that FIRST before each refresh, log in or log out
 
 
   // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     setLoading(false);
+  //   onAuthStateChanged(auth, (user) => { 
+  //    setLoading(false);
   //     console.log(user);
   //     if (user) {
   //       setUser(user);
   //     }
   //   });
   // }, []);
+  // this is the old David Brag useEffect but it did not keep user logged in after incorporating keeping the user logged in or out after refresh etc.
 
 
   function register() {
